@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar prefHeight="28.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <VBox layoutX="364.0" layoutY="52.0" prefHeight="200.0" prefWidth="149.0" spacing="5.0">
+         <children>
+            <RadioButton mnemonicParsing="false" text="Квадрат">
+               <toggleGroup>
+                  <ToggleGroup fx:id="shapeType" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Окружность" toggleGroup="$shapeType" />
+            <RadioButton mnemonicParsing="false" text="Треугольник" toggleGroup="$shapeType" />
+         </children>
+      </VBox>
+      <Pane layoutX="14.0" layoutY="52.0" prefHeight="334.0" prefWidth="333.0" style="-fx-border-color: gray;">
+         <children>
+            <Canvas fx:id="canvas" height="334.0" style="-fx-border-color: red;" width="333.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
