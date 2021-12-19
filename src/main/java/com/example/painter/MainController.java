@@ -4,15 +4,15 @@ import com.example.painter.lib.Circle;
 import com.example.painter.lib.Shape;
 import com.example.painter.lib.Square;
 
+import com.example.painter.lib.Triangle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -65,7 +65,7 @@ public class MainController {
         if (isDrawing)
         {
             size=Integer.parseInt(sizeTextField.getText());
-            shapes.add(new Square(new Point2D(event.getX(),event.getY()),size, Color.BLACK));
+            shapes.add(currentShape);
             isDrawing=false;
         }
 
@@ -90,66 +90,65 @@ public class MainController {
     {
         shapes=new ArrayList<>();
         isDrawing=false;
+        ToggleGroup radioGroup=new ToggleGroup();
+        squareRadioButton.setToggleGroup(radioGroup);
+        triangleRadioButton.setToggleGroup(radioGroup);
+        circleRadioButton.setToggleGroup(radioGroup);
+        radioGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if (newValue==triangleRadioButton && newValue.isSelected())
+                {
+                    size2TextField.setVisible(true);
+                    size3TextField.setVisible(true);
+                }
+                else
+                {
+                    size2TextField.setVisible(false);
+                    size3TextField.setVisible(false);
+                }
+            }
+        });
     }
 
     @FXML
     void drawButtonCLick(ActionEvent event)
     {
-        size2TextField.setVisible(false);
-        size3TextField.setVisible(false);
-
-
         int size=0;
         int size2=0;
         int size3=0;
         isDrawing=true;
-
         if (squareRadioButton.isSelected())
         {
-
             size=Integer.parseInt(sizeTextField.getText());
-
             currentShape=new Square(new Point2D(0,0),size, Color.BLACK);
-
-
         }
         else
         if (circleRadioButton.isSelected())
         {
-
             size=Integer.parseInt(sizeTextField.getText());
             currentShape=new Circle(new Point2D(0,0),size,Color.RED);
-
         }
         else
+        if (triangleRadioButton.isSelected())
         {
-            isDrawing=false;
-        }
-       /* if (triangleRadioButton.isSelected())
-        {
-            size2TextField.setVisible(true);
-            size3TextField.setVisible(true);
-            errorLabel.setVisible(false);
             size=Integer.parseInt(sizeTextField.getText());
             size2=Integer.parseInt(sizeTextField.getText());
             size3=Integer.parseInt(sizeTextField.getText());
-
-            currentShape=new Triangle(new Point2D(0,0),size,size2,size3, Color.BLACK);
-            if (size==0 || size2==0||size3==0)
+            try
+            {
+                currentShape=new Triangle(new Point2D(0,0),size,size2,size3, Color.BLACK);
+            }
+            catch (ArithmeticException exception)
             {
                 errorLabel.setVisible(true);
+                errorLabel.setText(exception.getMessage());
+                isDrawing=false;
             }
-
         }
         else
         {
-
             isDrawing=false;
-
-
-        }*/
-
-
+        }
     }
-
 }

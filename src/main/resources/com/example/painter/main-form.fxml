@@ -51,7 +51,7 @@
       <Button fx:id="drawButton" layoutX="406.0" layoutY="319.0" mnemonicParsing="false" onAction="#drawButtonCLick" text="Нарисовать" />
       <TextField fx:id="sizeTextField" layoutX="428.0" layoutY="258.0" prefHeight="31.0" prefWidth="40.0" />
       <Label layoutX="364.0" layoutY="263.0" prefHeight="21.0" prefWidth="58.0" text="Размер:" />
-      <Label fx:id="errorLabel" layoutX="416.0" layoutY="289.0" prefHeight="21.0" prefWidth="133.0" text="Впишите размер фигуры" textFill="#ee2e03" visible="false">
+      <Label fx:id="errorLabel" layoutX="416.0" layoutY="289.0" prefHeight="21.0" prefWidth="133.0" textFill="#ee2e03" visible="false">
          <font>
             <Font size="10.0" />
          </font>

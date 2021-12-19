@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 public class Circle extends Shape
 {
     private double radius;
-    public Circle(Point2D point, double size, Color color)
+    public Circle(Point2D point, double radius, Color color)
     {
         super(point, color);
         this.radius=radius;

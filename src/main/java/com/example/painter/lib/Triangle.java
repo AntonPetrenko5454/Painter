@@ -1,4 +1,4 @@
-/*package com.example.painter.lib;
+package com.example.painter.lib;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
@@ -7,29 +7,25 @@ import javafx.scene.paint.Color;
 
 public class Triangle extends Shape
 {
-    private double size1;
-    public Triangle(Point2D point, double size1,  Color color)
+    private double[] sides=new double[3];
+    public Triangle(Point2D point, double side1,double side2,double side3,  Color color)
     {
         super(point,color);
-        this.size1=size1;
-    }
-    private double size2;
-    public Triangle(Point2D point, double size2,  Color color)
-    {
-        super(point,color);
-        this.size2=size2;
-    }
-    private double size3;
-    public Triangle(Point2D point, double size3,  Color color)
-    {
-        super(point,color);
-        this.size3=size3;
+        sides[0]=side1;
+        sides[1]=side2;
+        sides[2]=side3;
+
+        if (side1+side2<side3 || side1+side3<side2 || side2+side3<side1)
+        {
+            throw new ArithmeticException("Треугольника с данными сторонами не существует");
+        }
+
     }
 
     @Override
     public void draw(Canvas canvas)
     {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.strokeRect(point.getX() , point.getY() , size1 , size2,size3);
+
     }
-}*/
+}
