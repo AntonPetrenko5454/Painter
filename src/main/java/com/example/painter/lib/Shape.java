@@ -19,9 +19,9 @@ public abstract class Shape
 
     }
     public abstract void draw(Canvas canvas);
-
-
-
-
+    public void moveTo(Point2D point)
+    {
+        this.point=point;
+    }
 
 }

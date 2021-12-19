@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.canvas.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -10,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.painter.MainController">
    <children>
       <MenuBar prefHeight="28.0" prefWidth="600.0">
         <menus>
@@ -34,19 +34,29 @@
       </MenuBar>
       <VBox layoutX="364.0" layoutY="52.0" prefHeight="200.0" prefWidth="149.0" spacing="5.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="Квадрат">
+            <RadioButton fx:id="squareRadioButton" mnemonicParsing="false" text="Квадрат">
                <toggleGroup>
                   <ToggleGroup fx:id="shapeType" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Окружность" toggleGroup="$shapeType" />
-            <RadioButton mnemonicParsing="false" text="Треугольник" toggleGroup="$shapeType" />
+            <RadioButton fx:id="circleRadioButton" mnemonicParsing="false" text="Окружность" toggleGroup="$shapeType" />
+            <RadioButton fx:id="triangleRadioButton" mnemonicParsing="false" text="Треугольник" toggleGroup="$shapeType" />
          </children>
       </VBox>
       <Pane layoutX="14.0" layoutY="52.0" prefHeight="334.0" prefWidth="333.0" style="-fx-border-color: gray;">
          <children>
-            <Canvas fx:id="canvas" height="334.0" style="-fx-border-color: red;" width="333.0" />
+            <Canvas fx:id="canvas" height="334.0" onMouseMoved="#onCanvasMouseMoved" onMousePressed="#onCanvasMousePressed" style="-fx-border-color: red;" width="333.0" />
          </children>
       </Pane>
+      <Button fx:id="drawButton" layoutX="406.0" layoutY="319.0" mnemonicParsing="false" onAction="#drawButtonCLick" text="Нарисовать" />
+      <TextField fx:id="sizeTextField" layoutX="428.0" layoutY="258.0" prefHeight="31.0" prefWidth="40.0" />
+      <Label layoutX="364.0" layoutY="263.0" prefHeight="21.0" prefWidth="58.0" text="Размер:" />
+      <Label fx:id="errorLabel" layoutX="416.0" layoutY="289.0" prefHeight="21.0" prefWidth="133.0" text="Впишите размер фигуры" textFill="#ee2e03" visible="false">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <TextField fx:id="size2TextField" layoutX="468.0" layoutY="258.0" prefHeight="31.0" prefWidth="40.0" visible="false" />
+      <TextField fx:id="size3TextField" layoutX="507.0" layoutY="258.0" prefHeight="31.0" prefWidth="40.0" visible="false" />
    </children>
 </AnchorPane>
