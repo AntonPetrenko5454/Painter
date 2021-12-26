@@ -10,9 +10,9 @@ import java.util.Arrays;
 public class Triangle extends Shape
 {
     private double[] sides=new double[3];
-    public Triangle(Point2D point, double side1, double side2, double side3,  Color color)
+    public Triangle(Point2D point, double side1, double side2, double side3,  Color color,boolean isFill)
     {
-        super(point,color);
+        super(point,color,isFill);
         sides[0]=side1;
         sides[1]=side2;
         sides[2]=side3;
@@ -28,8 +28,8 @@ public class Triangle extends Shape
     public void draw(Canvas canvas)
     {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        int[] sides = new int[3];
-        int p = Arrays.stream(sides).sum() / 2;
+
+        double p = Arrays.stream(sides).sum() / 2;
         double S = Math.sqrt(p * (p - sides[0]) * (p - sides[1]) * (p - sides[2]));
         double sinA = 2 * S / (sides[0] * sides[1]);
         double alpha = Math.asin(sinA);

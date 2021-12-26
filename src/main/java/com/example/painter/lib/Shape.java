@@ -12,11 +12,12 @@ public abstract class Shape
 {
     protected Point2D point;
     protected Color color;
-    public Shape(Point2D point, Color color)
+    protected boolean isFill;
+    public Shape(Point2D point, Color color,boolean isFill)
     {
         this.point=point;
         this.color=color;
-
+        this.isFill=isFill;
     }
     public abstract void draw(Canvas canvas);
     public void moveTo(Point2D point)

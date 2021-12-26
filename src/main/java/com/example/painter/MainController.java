@@ -1,10 +1,7 @@
 package com.example.painter;
 
-import com.example.painter.lib.Circle;
-import com.example.painter.lib.Shape;
-import com.example.painter.lib.Square;
+import com.example.painter.lib.*;
 
-import com.example.painter.lib.Triangle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -25,6 +22,10 @@ public class MainController {
     private Shape currentShape;
     private boolean isDrawing;
     @FXML
+    private TextField numOfSidesTextField;
+    @FXML
+    private RadioButton polygonRadioButton;
+    @FXML
     private Label welcomeText;
     @FXML
     private Label errorLabel;
@@ -33,7 +34,11 @@ public class MainController {
     @FXML
     private Button drawButton;
     @FXML
+    private Label numOfSidesLabel;
+    @FXML
     private TextField sizeTextField;
+    @FXML
+    private CheckBox isFillCheckBox;
     @FXML
     private TextField size2TextField;
     @FXML
@@ -94,6 +99,7 @@ public class MainController {
         squareRadioButton.setToggleGroup(radioGroup);
         triangleRadioButton.setToggleGroup(radioGroup);
         circleRadioButton.setToggleGroup(radioGroup);
+        polygonRadioButton.setToggleGroup(radioGroup);
         radioGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -107,6 +113,16 @@ public class MainController {
                     size2TextField.setVisible(false);
                     size3TextField.setVisible(false);
                 }
+                if (newValue==polygonRadioButton && newValue.isSelected())
+                {
+                    numOfSidesLabel.setVisible(true);
+                    numOfSidesTextField.setVisible(true);
+                }
+                else
+                {
+                    numOfSidesLabel.setVisible(false);
+                    numOfSidesTextField.setVisible(false);
+                }
             }
         });
     }
@@ -114,6 +130,7 @@ public class MainController {
     @FXML
     void drawButtonCLick(ActionEvent event)
     {
+        boolean isFill=isFillCheckBox.isSelected();
         int size=0;
         int size2=0;
         int size3=0;
@@ -121,13 +138,13 @@ public class MainController {
         if (squareRadioButton.isSelected())
         {
             size=Integer.parseInt(sizeTextField.getText());
-            currentShape=new Square(new Point2D(0,0),size, Color.BLACK);
+            currentShape=new Square(new Point2D(0,0),size, Color.BLACK,isFill);
         }
         else
         if (circleRadioButton.isSelected())
         {
             size=Integer.parseInt(sizeTextField.getText());
-            currentShape=new Circle(new Point2D(0,0),size,Color.RED);
+            currentShape=new Circle(new Point2D(0,0),size,Color.BLACK,isFill);
         }
         else
         if (triangleRadioButton.isSelected())
@@ -137,7 +154,7 @@ public class MainController {
             size3=Integer.parseInt(sizeTextField.getText());
             try
             {
-                currentShape=new Triangle(new Point2D(0,0),size,size2,size3, Color.BLACK);
+                currentShape=new Triangle(new Point2D(0,0),size,size2,size3, Color.BLACK,isFill);
             }
             catch (ArithmeticException exception)
             {
@@ -145,6 +162,13 @@ public class MainController {
                 errorLabel.setText(exception.getMessage());
                 isDrawing=false;
             }
+        }
+        else
+        if (polygonRadioButton.isSelected())
+        {
+            size=Integer.parseInt(sizeTextField.getText());
+            int numOFSides=Integer.parseInt(numOfSidesTextField.getText());
+            currentShape=new Polygon(new Point2D(0,0 ),size,numOFSides,Color.BLACK,isFill);
         }
         else
         {

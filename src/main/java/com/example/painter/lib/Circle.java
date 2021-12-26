@@ -8,9 +8,9 @@ import javafx.scene.paint.Color;
 public class Circle extends Shape
 {
     private double radius;
-    public Circle(Point2D point, double radius, Color color)
+    public Circle(Point2D point, double radius, Color color,boolean isFill)
     {
-        super(point, color);
+        super(point, color, isFill);
         this.radius=radius;
     }
 
@@ -18,6 +18,9 @@ public class Circle extends Shape
     public void draw(Canvas canvas)
     {
         GraphicsContext gc =canvas.getGraphicsContext2D();
-        gc.strokeOval(point.getX(), point.getY(), radius,radius);
+        if (isFill)
+            gc.fillOval(point.getX(), point.getY(), radius,radius);
+        else
+            gc.strokeOval(point.getX(), point.getY(), radius,radius);
     }
 }
