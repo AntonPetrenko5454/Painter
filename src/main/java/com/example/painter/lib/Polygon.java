@@ -32,6 +32,8 @@ public class Polygon extends Shape
             yPoints[i]=(point.getY()+Math.sin(angle/180.0*Math.PI)*size);
             angle+=z;
         }
+        gc.setStroke(color);
+        gc.setFill(color);
         if (isFill)
             gc.fillPolygon(xPoints,yPoints,sideCount);
         else

@@ -18,6 +18,8 @@ public class Square extends Shape
     public void draw(Canvas canvas)
     {
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setStroke(color);
+        gc.setFill(color);
         if (isFill)
             gc.fillRect(point.getX() , point.getY() , size , size);
         else

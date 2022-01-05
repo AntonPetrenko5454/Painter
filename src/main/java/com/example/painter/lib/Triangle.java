@@ -28,6 +28,11 @@ public class Triangle extends Shape
     public void draw(Canvas canvas)
     {
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setStroke(color);
+        gc.setFill(color);
+        double[] xPoint=new double[3];
+        double[] yPoint= new double[3];
+
 
         double p = Arrays.stream(sides).sum() / 2;
         double S = Math.sqrt(p * (p - sides[0]) * (p - sides[1]) * (p - sides[2]));
@@ -38,8 +43,15 @@ public class Triangle extends Shape
         int ox = (int) (((point.getX() + sides[0]) + (point.getX()) + (point.getX() + (int)x)) / 3);
         int oy = (int) (((point.getY()) + (point.getY() - (int)y) + (point.getY())) / 3);
         // После расчёта точек, строим линии между ними
-        gc.strokeLine(point.getX() + sides[0], point.getY(), point.getX(), point.getY());
+        /*gc.strokeLine(point.getX() + sides[0], point.getY(), point.getX(), point.getY());
         gc.strokeLine(point.getX(), point.getY(), point.getX() + (int)x, point.getY() - (int)y);
-        gc.strokeLine(point.getX() + (int)x, point.getY() - (int)y,point.getX() + sides[0], point.getY());
+        gc.strokeLine(point.getX() + (int)x, point.getY() - (int)y,point.getX() + sides[0], point.getY());*/
+        xPoint[0]=point.getX()+ sides[0] ;
+        yPoint[0]=point.getY()  ;
+        xPoint[1]=point.getX();
+        yPoint[1]=point.getY()-y;
+        xPoint[2]=point.getX()+ x;
+        yPoint[2]=point.getY() ;
+        gc.strokePolygon(xPoint,yPoint,3);
     }
 }

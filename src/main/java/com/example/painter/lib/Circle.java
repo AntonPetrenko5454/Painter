@@ -18,6 +18,8 @@ public class Circle extends Shape
     public void draw(Canvas canvas)
     {
         GraphicsContext gc =canvas.getGraphicsContext2D();
+        gc.setStroke(color);
+        gc.setFill(color);
         if (isFill)
             gc.fillOval(point.getX(), point.getY(), radius,radius);
         else

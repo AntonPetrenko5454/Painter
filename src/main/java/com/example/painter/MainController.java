@@ -42,6 +42,8 @@ public class MainController {
     @FXML
     private TextField size2TextField;
     @FXML
+    private ColorPicker colorPicker;
+    @FXML
     private TextField size3TextField;
     @FXML
     private RadioButton triangleRadioButton;
@@ -130,6 +132,7 @@ public class MainController {
     @FXML
     void drawButtonCLick(ActionEvent event)
     {
+        Color color=colorPicker.getValue();
         boolean isFill=isFillCheckBox.isSelected();
         int size=0;
         int size2=0;
@@ -138,13 +141,13 @@ public class MainController {
         if (squareRadioButton.isSelected())
         {
             size=Integer.parseInt(sizeTextField.getText());
-            currentShape=new Square(new Point2D(0,0),size, Color.BLACK,isFill);
+            currentShape=new Square(new Point2D(0,0),size, color,isFill);
         }
         else
         if (circleRadioButton.isSelected())
         {
             size=Integer.parseInt(sizeTextField.getText());
-            currentShape=new Circle(new Point2D(0,0),size,Color.BLACK,isFill);
+            currentShape=new Circle(new Point2D(0,0),size,color,isFill);
         }
         else
         if (triangleRadioButton.isSelected())
@@ -154,7 +157,7 @@ public class MainController {
             size3=Integer.parseInt(sizeTextField.getText());
             try
             {
-                currentShape=new Triangle(new Point2D(0,0),size,size2,size3, Color.BLACK,isFill);
+                currentShape=new Triangle(new Point2D(0,0),size,size2,size3, color,isFill);
             }
             catch (ArithmeticException exception)
             {
@@ -168,7 +171,7 @@ public class MainController {
         {
             size=Integer.parseInt(sizeTextField.getText());
             int numOFSides=Integer.parseInt(numOfSidesTextField.getText());
-            currentShape=new Polygon(new Point2D(0,0 ),size,numOFSides,Color.BLACK,isFill);
+            currentShape=new Polygon(new Point2D(0,0 ),size,numOFSides,color,isFill);
         }
         else
         {
