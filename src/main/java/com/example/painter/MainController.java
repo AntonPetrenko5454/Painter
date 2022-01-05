@@ -51,53 +51,44 @@ public class MainController {
     private RadioButton circleRadioButton;
     @FXML
     private RadioButton squareRadioButton;
+
     @FXML
-    void onCanvasMouseMoved(MouseEvent event)
-    {
-        if (isDrawing)
-        {
-
-            currentShape.moveTo(new Point2D(event.getX(),event.getY()));
-
+    void onCanvasMouseMoved(MouseEvent event) {
+        if (isDrawing) {
+            currentShape.moveTo(new Point2D(event.getX(), event.getY()));
             redraw();
             currentShape.draw(canvas);
         }
-
     }
-    @FXML
-    void onCanvasMousePressed(MouseEvent event)
-    {
-        int size=0;
 
-        if (isDrawing)
-        {
-            size=Integer.parseInt(sizeTextField.getText());
+    @FXML
+    void onCanvasMousePressed(MouseEvent event) {
+        int size = 0;
+
+        if (isDrawing) {
+            size = Integer.parseInt(sizeTextField.getText());
             shapes.add(currentShape);
-            isDrawing=false;
+            isDrawing = false;
         }
 
     }
 
 
-    void redraw()
-    {
+    void redraw() {
 
-        canvas.getGraphicsContext2D().clearRect(0,0,canvas.getWidth(),canvas.getHeight());
-        for (Shape shape:shapes)
-        {
+        canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        for (Shape shape : shapes) {
             shape.draw(canvas);
 
         }
     }
 
 
-
     @FXML
-    public void initialize()
-    {
-        shapes=new ArrayList<>();
-        isDrawing=false;
-        ToggleGroup radioGroup=new ToggleGroup();
+    public void initialize() {
+        shapes = new ArrayList<>();
+        isDrawing = false;
+        ToggleGroup radioGroup = new ToggleGroup();
         squareRadioButton.setToggleGroup(radioGroup);
         triangleRadioButton.setToggleGroup(radioGroup);
         circleRadioButton.setToggleGroup(radioGroup);
@@ -105,23 +96,17 @@ public class MainController {
         radioGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                if (newValue==triangleRadioButton && newValue.isSelected())
-                {
+                if (newValue == triangleRadioButton && newValue.isSelected()) {
                     size2TextField.setVisible(true);
                     size3TextField.setVisible(true);
-                }
-                else
-                {
+                } else {
                     size2TextField.setVisible(false);
                     size3TextField.setVisible(false);
                 }
-                if (newValue==polygonRadioButton && newValue.isSelected())
-                {
+                if (newValue == polygonRadioButton && newValue.isSelected()) {
                     numOfSidesLabel.setVisible(true);
                     numOfSidesTextField.setVisible(true);
-                }
-                else
-                {
+                } else {
                     numOfSidesLabel.setVisible(false);
                     numOfSidesTextField.setVisible(false);
                 }
@@ -130,52 +115,36 @@ public class MainController {
     }
 
     @FXML
-    void drawButtonCLick(ActionEvent event)
-    {
-        Color color=colorPicker.getValue();
-        boolean isFill=isFillCheckBox.isSelected();
-        int size=0;
-        int size2=0;
-        int size3=0;
-        isDrawing=true;
-        if (squareRadioButton.isSelected())
-        {
-            size=Integer.parseInt(sizeTextField.getText());
-            currentShape=new Square(new Point2D(0,0),size, color,isFill);
-        }
-        else
-        if (circleRadioButton.isSelected())
-        {
-            size=Integer.parseInt(sizeTextField.getText());
-            currentShape=new Circle(new Point2D(0,0),size,color,isFill);
-        }
-        else
-        if (triangleRadioButton.isSelected())
-        {
-            size=Integer.parseInt(sizeTextField.getText());
-            size2=Integer.parseInt(sizeTextField.getText());
-            size3=Integer.parseInt(sizeTextField.getText());
-            try
-            {
-                currentShape=new Triangle(new Point2D(0,0),size,size2,size3, color,isFill);
-            }
-            catch (ArithmeticException exception)
-            {
+    void drawButtonCLick(ActionEvent event) {
+        Color color = colorPicker.getValue();
+        boolean isFill = isFillCheckBox.isSelected();
+        int size = 0;
+        int size2 = 0;
+        int size3 = 0;
+        isDrawing = true;
+        if (squareRadioButton.isSelected()) {
+            size = Integer.parseInt(sizeTextField.getText());
+            currentShape = new Square(new Point2D(0, 0), size, color, isFill);
+        } else if (circleRadioButton.isSelected()) {
+            size = Integer.parseInt(sizeTextField.getText());
+            currentShape = new Circle(new Point2D(0, 0), size, color, isFill);
+        } else if (triangleRadioButton.isSelected()) {
+            size = Integer.parseInt(sizeTextField.getText());
+            size2 = Integer.parseInt(sizeTextField.getText());
+            size3 = Integer.parseInt(sizeTextField.getText());
+            try {
+                currentShape = new Triangle(new Point2D(0, 0), size, size2, size3, color, isFill);
+            } catch (ArithmeticException exception) {
                 errorLabel.setVisible(true);
                 errorLabel.setText(exception.getMessage());
-                isDrawing=false;
+                isDrawing = false;
             }
-        }
-        else
-        if (polygonRadioButton.isSelected())
-        {
-            size=Integer.parseInt(sizeTextField.getText());
-            int numOFSides=Integer.parseInt(numOfSidesTextField.getText());
-            currentShape=new Polygon(new Point2D(0,0 ),size,numOFSides,color,isFill);
-        }
-        else
-        {
-            isDrawing=false;
+        } else if (polygonRadioButton.isSelected()) {
+            size = Integer.parseInt(sizeTextField.getText());
+            int numOFSides = Integer.parseInt(numOfSidesTextField.getText());
+            currentShape = new Polygon(new Point2D(0, 0), size, numOFSides, color, isFill);
+        } else {
+            isDrawing = false;
         }
     }
 }

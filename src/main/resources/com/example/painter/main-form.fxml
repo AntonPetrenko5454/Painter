@@ -11,61 +11,74 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.painter.MainController">
-   <children>
-      <MenuBar prefHeight="28.0" prefWidth="600.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <VBox layoutX="364.0" layoutY="52.0" prefHeight="106.0" prefWidth="149.0" spacing="5.0">
-         <children>
-            <RadioButton fx:id="squareRadioButton" mnemonicParsing="false" text="Квадрат">
-               <toggleGroup>
-                  <ToggleGroup fx:id="shapeType" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="circleRadioButton" mnemonicParsing="false" text="Окружность" toggleGroup="$shapeType" />
-            <RadioButton fx:id="triangleRadioButton" mnemonicParsing="false" text="Треугольник" toggleGroup="$shapeType" />
-            <RadioButton fx:id="polygonRadioButton" mnemonicParsing="false" prefHeight="21.0" prefWidth="139.0" text="Многоугольник" />
-         </children>
-      </VBox>
-      <Pane layoutX="14.0" layoutY="52.0" prefHeight="334.0" prefWidth="333.0" style="-fx-border-color: gray;">
-         <children>
-            <Canvas fx:id="canvas" height="334.0" onMouseMoved="#onCanvasMouseMoved" onMousePressed="#onCanvasMousePressed" style="-fx-border-color: red;" width="333.0" />
-         </children>
-      </Pane>
-      <Button fx:id="drawButton" layoutX="406.0" layoutY="319.0" mnemonicParsing="false" onAction="#drawButtonCLick" text="Нарисовать" />
-      <TextField fx:id="sizeTextField" layoutX="428.0" layoutY="258.0" prefHeight="31.0" prefWidth="40.0" />
-      <Label layoutX="364.0" layoutY="263.0" prefHeight="21.0" prefWidth="58.0" text="Размер:" />
-      <Label fx:id="errorLabel" layoutX="416.0" layoutY="289.0" prefHeight="21.0" prefWidth="133.0" textFill="#ee2e03" visible="false">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
-      <TextField fx:id="size2TextField" layoutX="468.0" layoutY="258.0" prefHeight="31.0" prefWidth="40.0" visible="false" />
-      <TextField fx:id="size3TextField" layoutX="507.0" layoutY="258.0" prefHeight="31.0" prefWidth="40.0" visible="false" />
-      <TextField fx:id="numOfSidesTextField" layoutX="475.0" layoutY="219.0" prefHeight="31.0" prefWidth="40.0" visible="false" />
-      <Label fx:id="numOfSidesLabel" layoutX="363.0" layoutY="226.0" prefHeight="17.0" prefWidth="114.0" text="Количество сторон:" visible="false">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Label>
-      <CheckBox fx:id="isFillCheckBox" layoutX="363.0" layoutY="165.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="101.0" text="Заливка" />
-      <ColorPicker fx:id="colorPicker" layoutX="467.0" layoutY="160.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.painter.MainController">
+    <children>
+        <MenuBar prefHeight="28.0" prefWidth="600.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <VBox layoutX="364.0" layoutY="52.0" prefHeight="106.0" prefWidth="149.0" spacing="5.0">
+            <children>
+                <RadioButton fx:id="squareRadioButton" mnemonicParsing="false" text="Квадрат">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="shapeType"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="circleRadioButton" mnemonicParsing="false" text="Окружность"
+                             toggleGroup="$shapeType"/>
+                <RadioButton fx:id="triangleRadioButton" mnemonicParsing="false" text="Треугольник"
+                             toggleGroup="$shapeType"/>
+                <RadioButton fx:id="polygonRadioButton" mnemonicParsing="false" prefHeight="21.0" prefWidth="139.0"
+                             text="Многоугольник"/>
+            </children>
+        </VBox>
+        <Pane layoutX="14.0" layoutY="52.0" prefHeight="334.0" prefWidth="333.0" style="-fx-border-color: gray;">
+            <children>
+                <Canvas fx:id="canvas" height="334.0" onMouseMoved="#onCanvasMouseMoved"
+                        onMousePressed="#onCanvasMousePressed" style="-fx-border-color: red;" width="333.0"/>
+            </children>
+        </Pane>
+        <Button fx:id="drawButton" layoutX="406.0" layoutY="319.0" mnemonicParsing="false" onAction="#drawButtonCLick"
+                text="Нарисовать"/>
+        <TextField fx:id="sizeTextField" layoutX="428.0" layoutY="258.0" prefHeight="31.0" prefWidth="40.0"/>
+        <Label layoutX="364.0" layoutY="263.0" prefHeight="21.0" prefWidth="58.0" text="Размер:"/>
+        <Label fx:id="errorLabel" layoutX="416.0" layoutY="289.0" prefHeight="21.0" prefWidth="133.0" textFill="#ee2e03"
+               visible="false">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="size2TextField" layoutX="468.0" layoutY="258.0" prefHeight="31.0" prefWidth="40.0"
+                   visible="false"/>
+        <TextField fx:id="size3TextField" layoutX="507.0" layoutY="258.0" prefHeight="31.0" prefWidth="40.0"
+                   visible="false"/>
+        <TextField fx:id="numOfSidesTextField" layoutX="475.0" layoutY="219.0" prefHeight="31.0" prefWidth="40.0"
+                   visible="false"/>
+        <Label fx:id="numOfSidesLabel" layoutX="363.0" layoutY="226.0" prefHeight="17.0" prefWidth="114.0"
+               text="Количество сторон:" visible="false">
+            <font>
+                <Font size="12.0"/>
+            </font>
+        </Label>
+        <CheckBox fx:id="isFillCheckBox" layoutX="363.0" layoutY="165.0" mnemonicParsing="false" prefHeight="21.0"
+                  prefWidth="101.0" text="Заливка"/>
+        <ColorPicker fx:id="colorPicker" layoutX="467.0" layoutY="160.0"/>
+    </children>
 </AnchorPane>
