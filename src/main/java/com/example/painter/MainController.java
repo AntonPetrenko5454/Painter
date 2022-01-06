@@ -83,6 +83,8 @@ public class MainController {
         }
     }
 
+    // TODO: Сделать ToString у всех фигур, чтобы в ListView
+    //       отображалась основная иноформация о фигуре: название, координаты, размеры, цвет, заливка.
 
     @FXML
     public void initialize() {
