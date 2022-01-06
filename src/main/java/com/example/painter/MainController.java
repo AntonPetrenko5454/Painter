@@ -86,7 +86,7 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        shapes = FXCollections.emptyObservableList();
+        shapes = FXCollections.observableArrayList();
         shapesListView.setItems(shapes);
         isDrawing = false;
         ToggleGroup radioGroup = new ToggleGroup();
