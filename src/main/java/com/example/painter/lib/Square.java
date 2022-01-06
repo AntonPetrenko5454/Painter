@@ -25,4 +25,9 @@ public class Square extends Shape
         else
             gc.strokeRect(point.getX() , point.getY() , size , size);
     }
+
+    @Override
+    public String toString() {
+        return "Square";
+    }
 }

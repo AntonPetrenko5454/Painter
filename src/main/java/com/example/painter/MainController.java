@@ -4,6 +4,8 @@ import com.example.painter.lib.*;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
@@ -13,12 +15,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainController {
-    private List<Shape> shapes;
+    private ObservableList<Shape> shapes;
     private Shape currentShape;
     private boolean isDrawing;
     @FXML
@@ -49,6 +47,8 @@ public class MainController {
     private RadioButton triangleRadioButton;
     @FXML
     private RadioButton circleRadioButton;
+    @FXML
+    private ListView<Shape> shapesListView;
     @FXML
     private RadioButton squareRadioButton;
 
@@ -86,7 +86,8 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        shapes = new ArrayList<>();
+        shapes = FXCollections.emptyObservableList();
+        shapesListView.setItems(shapes);
         isDrawing = false;
         ToggleGroup radioGroup = new ToggleGroup();
         squareRadioButton.setToggleGroup(radioGroup);

@@ -38,16 +38,20 @@ public class Triangle extends Shape {
         double y = sides[1] * Math.sin(alpha);
         int ox = (int) (((point.getX() + sides[0]) + (point.getX()) + (point.getX() + (int) x)) / 3);
         int oy = (int) (((point.getY()) + (point.getY() - (int) y) + (point.getY())) / 3);
-        // После расчёта точек, строим линии между ними
-        /*gc.strokeLine(point.getX() + sides[0], point.getY(), point.getX(), point.getY());
-        gc.strokeLine(point.getX(), point.getY(), point.getX() + (int)x, point.getY() - (int)y);
-        gc.strokeLine(point.getX() + (int)x, point.getY() - (int)y,point.getX() + sides[0], point.getY());*/
         xPoint[0] = point.getX() + sides[0];
         yPoint[0] = point.getY();
         xPoint[1] = point.getX();
         yPoint[1] = point.getY();
         xPoint[2] = point.getX() + x;
         yPoint[2] = point.getY() - y;
-        gc.strokePolygon(xPoint, yPoint, 3);
+        if(isFill)
+        {
+            gc.fillPolygon(xPoint,yPoint,3);
+        }
+        else
+        {
+            gc.strokePolygon(xPoint, yPoint, 3);
+        }
+
     }
 }
