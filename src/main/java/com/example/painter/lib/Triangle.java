@@ -3,6 +3,7 @@ package com.example.painter.lib;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ListView;
 import javafx.scene.paint.Color;
 
 import java.util.Arrays;
@@ -53,5 +54,15 @@ public class Triangle extends Shape {
             gc.strokePolygon(xPoint, yPoint, 3);
         }
 
+
+    }
+    @Override
+    public String toString()
+    {
+        String nameOfColor=color.toString();
+        String info="Triangle ";
+        info+=String.format("[%.1f, %.1f] (%.1f, %.1f, %.1f) %s %s",point.getX(),point.getY(),sides[0],sides[1],sides[2],(isFill ? "fill":"stroke"),nameOfColor);
+
+        return info;
     }
 }

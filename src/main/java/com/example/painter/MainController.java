@@ -14,6 +14,17 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.Buffer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class MainController {
     private ObservableList<Shape> shapes;
@@ -37,6 +48,9 @@ public class MainController {
     private TextField sizeTextField;
     @FXML
     private CheckBox isFillCheckBox;
+
+    @FXML
+    private MenuItem loadMenuItem;
     @FXML
     private TextField size2TextField;
     @FXML
@@ -73,7 +87,21 @@ public class MainController {
 
     }
 
-
+    @FXML
+    void saveMenuItemClick(MouseEvent event) throws IOException {
+        FileChooser filechooser = new FileChooser();
+        File file = filechooser.showOpenDialog(null);
+        if (file != null)
+        {
+            Path path= Paths.get(file.toURI());
+            BufferedWriter writer= Files.newBufferedWriter(path);
+            for (int i=0;i<shapes.size();i++)
+            {
+                writer.write(shapes.get(i).toString());
+            }
+            writer.close();
+        }
+    }
     void redraw() {
 
         canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -83,8 +111,7 @@ public class MainController {
         }
     }
 
-    // TODO: Сделать ToString у всех фигур, чтобы в ListView
-    //       отображалась основная иноформация о фигуре: название, координаты, размеры, цвет, заливка.
+
 
     @FXML
     public void initialize() {

@@ -27,7 +27,11 @@ public class Square extends Shape
     }
 
     @Override
-    public String toString() {
-        return "Square";
+    public String toString()
+    {
+        String nameOfColor=color.toString();
+        String info="Square ";
+        info+=String.format("[%.1f, %.1f] (%.1f) %s %s",point.getX(),point.getY(),size,(isFill ? "fill":"stroke"),nameOfColor);
+        return info;
     }
 }

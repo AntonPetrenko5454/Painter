@@ -38,5 +38,15 @@ public class Polygon extends Shape
             gc.fillPolygon(xPoints,yPoints,sideCount);
         else
             gc.strokePolygon(xPoints,yPoints,sideCount);
+
+    }
+
+    @Override
+    public String toString()
+    {
+        String nameOfColor=color.toString();
+        String info="Polygon ";
+        info+=String.format("[%.1f, %.1f] (%.1f, %d) %s %s",point.getX(),point.getY(),size,sideCount,(isFill ? "fill":"stroke"),nameOfColor);
+        return info;
     }
 }
