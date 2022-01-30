@@ -24,6 +24,9 @@ public abstract class Shape
     {
         this.point=point;
     }
+    public abstract String toFileString();
+
+
 
 
 }

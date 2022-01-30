@@ -6,7 +6,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ListView;
 import javafx.scene.paint.Color;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class Triangle extends Shape {
     private double[] sides = new double[3];
@@ -56,12 +59,21 @@ public class Triangle extends Shape {
 
 
     }
+
+    @Override
+    public String toFileString() {
+        return String.format(Locale.ENGLISH,"%s %.1f %.1f %.1f %.1f %.1f %s %s");
+    }
+
     @Override
     public String toString()
     {
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
+        otherSymbols.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("###.##", otherSymbols);
         String nameOfColor=color.toString();
         String info="Triangle ";
-        info+=String.format("[%.1f, %.1f] (%.1f, %.1f, %.1f) %s %s",point.getX(),point.getY(),sides[0],sides[1],sides[2],(isFill ? "fill":"stroke"),nameOfColor);
+        info+=String.format(Locale.ENGLISH,"[%.1f, %.1f] (%.1f, %.1f, %.1f) %s %s",point.getX(),point.getY(),sides[0],sides[1],sides[2],(isFill ? "fill":"stroke"),nameOfColor);
 
         return info;
     }

@@ -5,6 +5,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 public class Polygon extends Shape
 {
     private double size;
@@ -42,11 +46,19 @@ public class Polygon extends Shape
     }
 
     @Override
+    public String toFileString() {
+        return String.format(Locale.ENGLISH,"%s %.1f %.1f %.1f %d %s %s");
+    }
+
+    @Override
     public String toString()
     {
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
+        otherSymbols.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("###.##", otherSymbols);
         String nameOfColor=color.toString();
         String info="Polygon ";
-        info+=String.format("[%.1f, %.1f] (%.1f, %d) %s %s",point.getX(),point.getY(),size,sideCount,(isFill ? "fill":"stroke"),nameOfColor);
+        info+=String.format(Locale.ENGLISH,"[%.1f, %.1f] (%.1f, %d) %s %s",point.getX(),point.getY(),size,sideCount,(isFill ? "fill":"stroke"),nameOfColor);
         return info;
     }
 }

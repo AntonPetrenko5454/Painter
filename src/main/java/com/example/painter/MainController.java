@@ -16,10 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -88,22 +85,65 @@ public class MainController {
     }
 
     @FXML
-    void saveMenuItemClick(MouseEvent event) throws IOException {
+    void saveMenuItemClick() throws IOException {
         FileChooser filechooser = new FileChooser();
-        File file = filechooser.showOpenDialog(null);
+        File file = filechooser.showSaveDialog(null);
         if (file != null)
         {
             Path path= Paths.get(file.toURI());
             BufferedWriter writer= Files.newBufferedWriter(path);
             for (int i=0;i<shapes.size();i++)
             {
-                writer.write(shapes.get(i).toString());
+                writer.write(shapes.get(i).toFileString()+"\n");
             }
             writer.close();
         }
     }
-    void redraw() {
+    @FXML
+    void loadMenuItemClick() throws  IOException{
+        FileChooser filechooser = new FileChooser();
+        File file = filechooser.showOpenDialog(null);
+        if (file !=null)
+        {
+            Scanner input=new Scanner(file);
+            while (input.hasNextLine())
+            {
+                String line ;
+                String[] allInfo;
 
+                line=input.nextLine();
+                allInfo=line.split("\\s");
+                switch (allInfo[0])
+                {
+                    case "Circle":
+                        Circle circle=new Circle(new Point2D(Double.parseDouble(allInfo[1]),Double.parseDouble(allInfo[2])),
+                                Double.parseDouble(allInfo[3]),Color.web(allInfo[5]),(allInfo[4].compareTo("fill")==0?true:false));
+                        shapes.add(circle);
+
+                        break;
+                    case "Polygon":
+                        Polygon polygon=new Polygon(new Point2D(Double.parseDouble(allInfo[1]),Double.parseDouble(allInfo[2])),
+                                Double.parseDouble(allInfo[3]),Integer.parseInt(allInfo[4]),Color.web(allInfo[6]),(allInfo[5].compareTo("fill")==0?true:false));
+                        shapes.add(polygon);
+                        break;
+                    case "Square":
+                        Square square=new Square(new Point2D(Double.parseDouble(allInfo[1]),Double.parseDouble(allInfo[2])),Double.parseDouble(allInfo[3]),
+                                Color.web(allInfo[5]),(allInfo[4].compareTo("fill")==0?true:false));
+                        shapes.add(square);
+                        break;
+                    case "Triangle":
+                        Triangle triangle=new Triangle(new Point2D(Double.parseDouble(allInfo[1]),Double.parseDouble(allInfo[2])),Double.parseDouble(allInfo[3]),
+                                Double.parseDouble(allInfo[4]),Double.parseDouble(allInfo[5]),Color.web(allInfo[7]),(allInfo[6].compareTo("fill")==0?true:false));
+                        shapes.add(triangle);
+                        break;
+                }
+
+            }
+
+        }
+        redraw();
+    }
+    void redraw() {
         canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (Shape shape : shapes) {
             shape.draw(canvas);
