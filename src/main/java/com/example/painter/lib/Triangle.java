@@ -32,38 +32,50 @@ public class Triangle extends Shape {
         gc.setFill(color);
         double[] xPoint = new double[3];
         double[] yPoint = new double[3];
+        double[] sSides = new double[3];
 
-
-        double p = Arrays.stream(sides).sum() / 2;
-        double S = Math.sqrt(p * (p - sides[0]) * (p - sides[1]) * (p - sides[2]));
-        double sinA = 2 * S / (sides[0] * sides[1]);
+        sSides[0] = sides[0] * scale;
+        sSides[1] = sides[1] * scale;
+        sSides[2] = sides[2] * scale;
+        double p = Arrays.stream(sSides).sum() / 2;
+        double S = Math.sqrt(p * (p - sSides[0]) * (p - sSides[1]) * (p - sSides[2]));
+        double sinA = 2 * S / (sSides[0] * sSides[1]);
         double alpha = Math.asin(sinA);
-        double x = sides[1] * Math.cos(alpha);
-        double y = sides[1] * Math.sin(alpha);
-        int ox = (int) (((point.getX() + sides[0]) + (point.getX()) + (point.getX() + (int) x)) / 3);
+        double x = sSides[1] * Math.cos(alpha);
+        double y = sSides[1] * Math.sin(alpha);
+        int ox = (int) (((point.getX() + sSides[0]) + (point.getX()) + (point.getX() + (int) x)) / 3);
         int oy = (int) (((point.getY()) + (point.getY() - (int) y) + (point.getY())) / 3);
-        xPoint[0] = point.getX() + sides[0];
+        xPoint[0] = point.getX() + sSides[0];
         yPoint[0] = point.getY();
         xPoint[1] = point.getX();
         yPoint[1] = point.getY();
         xPoint[2] = point.getX() + x;
         yPoint[2] = point.getY() - y;
-        if(isFill)
-        {
-            gc.fillPolygon(xPoint,yPoint,3);
-        }
-        else
-        {
+        if (isFill) {
+            gc.fillPolygon(xPoint, yPoint, 3);
+        } else {
             gc.strokePolygon(xPoint, yPoint, 3);
         }
+        if (isSelected)
+        {
 
+            gc.strokePolygon(xPoint,yPoint,3);
+
+        }
 
     }
+
+
+
 
     @Override
     public String toFileString() {
-        return String.format(Locale.ENGLISH,"%s %.1f %.1f %.1f %.1f %.1f %s %s");
+        String info="Triangle";
+        String nameOfColor=color.toString();
+        return String.format(Locale.ENGLISH,"%s %.1f %.1f %.1f %.1f %.1f %s %s",info,point.getX(),point.getY(),sides[0],sides[1],sides[2],(isFill ? "fill":"stroke"),nameOfColor);
     }
+
+
 
     @Override
     public String toString()

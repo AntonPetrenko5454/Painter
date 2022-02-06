@@ -3,7 +3,6 @@ package com.example.painter.lib;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ListView;
 import javafx.scene.paint.Color;
 
 import java.text.DecimalFormat;
@@ -23,19 +22,30 @@ public class Circle extends Shape
     public void draw(Canvas canvas)
     {
         GraphicsContext gc =canvas.getGraphicsContext2D();
+        double sRadius=scale*radius;
         gc.setStroke(color);
         gc.setFill(color);
         if (isFill)
-            gc.fillOval(point.getX(), point.getY(), radius,radius);
+            gc.fillOval(point.getX()-(sRadius/2), point.getY()-(sRadius/2), sRadius,sRadius);
         else
-            gc.strokeOval(point.getX(), point.getY(), radius,radius);
-
+            gc.strokeOval(point.getX()-(sRadius/2), point.getY()-(sRadius/2), sRadius,sRadius);
+        if (isSelected)
+        {
+            gc.strokeOval(point.getX()-((sRadius/2)+1), point.getY()-((sRadius/2)+1), sRadius+2,sRadius+2);
+        }
     }
+
+
+
 
     @Override
     public String toFileString() {
-        return String.format(Locale.ENGLISH,"%s %.1f %.1f %.1f %s %s");
+        String nameOfColor=color.toString();
+        String info="Circle";
+        return String.format(Locale.ENGLISH,"%s %.1f %.1f %.1f %s %s",info,point.getX(), point.getY(),radius,(isFill ? "fill":"stroke"),nameOfColor);
     }
+
+
 
     @Override
     public String toString()

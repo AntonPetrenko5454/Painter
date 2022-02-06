@@ -23,18 +23,29 @@ public class Square extends Shape
     {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setStroke(color);
+        double sSize=size*scale;
         gc.setFill(color);
         if (isFill)
-            gc.fillRect(point.getX() , point.getY() , size , size);
+            gc.fillRect(point.getX() -(sSize/2), point.getY()- (sSize/2) , sSize , sSize);
         else
-            gc.strokeRect(point.getX() , point.getY() , size , size);
+            gc.strokeRect(point.getX() -(sSize/2), point.getY() -(sSize/2), sSize , sSize);
+        if (isSelected)
+        {
+            gc.strokeRect(point.getX()-((sSize/2)+1),point.getY()- ((sSize/2)+1),sSize+2,sSize+2);
+        }
     }
+
+
+
 
     @Override
     public String toFileString() {
-
-        return String.format(Locale.ENGLISH,"%s %.1f %.1f %.1f %s %s");
+        String info="Square";
+        String nameOfColor=color.toString();
+        return String.format(Locale.ENGLISH,"%s %.1f %.1f %.1f %s %s",info,point.getX(),point.getY(),size,(isFill ? "fill":"stroke"),nameOfColor);
     }
+
+
 
     @Override
     public String toString()

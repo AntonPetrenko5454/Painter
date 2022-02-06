@@ -24,9 +24,11 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class MainController {
+    private Shape selectedShape=null;
     private ObservableList<Shape> shapes;
     private Shape currentShape;
     private boolean isDrawing;
+
     @FXML
     private TextField numOfSidesTextField;
     @FXML
@@ -45,7 +47,8 @@ public class MainController {
     private TextField sizeTextField;
     @FXML
     private CheckBox isFillCheckBox;
-
+    @FXML
+    private Slider scaleSlider;
     @FXML
     private MenuItem loadMenuItem;
     @FXML
@@ -62,6 +65,36 @@ public class MainController {
     private ListView<Shape> shapesListView;
     @FXML
     private RadioButton squareRadioButton;
+    @FXML
+    void deleteButtonClick(ActionEvent event) {
+        Shape shape =shapesListView.getSelectionModel().getSelectedItem();
+        shapes.remove(shape);
+        redraw();
+    }
+
+    public void onShapesListViewClick(MouseEvent event)
+    {
+        Shape shape =shapesListView.getSelectionModel().getSelectedItem();
+        double scale;
+        if(shape!=null)
+        {
+            if (selectedShape!=null)
+            {
+                selectedShape.setSelected(false);
+            }
+
+            selectedShape=shape;
+            selectedShape.setSelected(true);
+
+
+            scale=shape.getScale();
+            scaleSlider.setValue(scale*100);
+
+            redraw();
+        }
+
+    }
+
 
     @FXML
     void onCanvasMouseMoved(MouseEvent event) {
@@ -179,6 +212,18 @@ public class MainController {
                 } else {
                     numOfSidesLabel.setVisible(false);
                     numOfSidesTextField.setVisible(false);
+                }
+            }
+        });
+        scaleSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                Shape shape =shapesListView.getSelectionModel().getSelectedItem();
+                double scale=newValue.intValue()/100.0;
+                if (shape!=null)
+                {
+                    shape.setScale(scale);
+                    redraw();
                 }
             }
         });
